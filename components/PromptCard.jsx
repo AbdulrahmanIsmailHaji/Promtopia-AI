@@ -15,9 +15,12 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const handleProfileClick = () => {
     console.log(post);
 
-    if (post.creator._id === session?.user.id) return router.push("/profile");
+    if (post.creator._id === session?.user.id)
+      return router.push(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/profile`);
 
-    router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
+    router.push(
+      `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/profile/${post.creator._id}?name=${post.creator.username}`
+    );
   };
 
   const handleCopy = () => {

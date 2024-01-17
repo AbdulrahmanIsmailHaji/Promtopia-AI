@@ -15,7 +15,9 @@ const UpdatePrompt = () => {
 
   useEffect(() => {
     const getPromptDetails = async () => {
-      const response = await fetch(`/api/prompt/${promptId}`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/prompt/${promptId}`
+      );
       const data = await response.json();
 
       setPost({
@@ -34,13 +36,16 @@ const UpdatePrompt = () => {
     if (!promptId) return alert("Missing PromptId!");
 
     try {
-      const response = await fetch(`/api/prompt/${promptId}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          prompt: post.prompt,
-          tag: post.tag,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/prompt/${promptId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            prompt: post.prompt,
+            tag: post.tag,
+          }),
+        }
+      );
 
       if (response.ok) {
         router.push("/");
